@@ -10,6 +10,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,6 +72,7 @@ public class CatalogController {
         return "Stock is successfully updated"+"\n"+get;
     }
 
+
     @PostMapping(value = "/catalogs/add")
     public String  addCatalog(@RequestBody RequestCatalog music){
         ModelMapper mapper=new ModelMapper();
@@ -81,6 +83,15 @@ public class CatalogController {
         return "Catalog is created";
     }
 
+//    get music-service/musics/{musicId}
+    @GetMapping(value = "/catalog/{musicId}",produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ResponseCatalog> getMusic(@PathVariable("musicId") String musicId){
+        CatalogDto catalogDto = catalogService.getMusicByMusicId(musicId);
+        ResponseCatalog returnvalue = new ModelMapper().map(catalogDto, ResponseCatalog.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnvalue);
+
+    }
 
 
 

@@ -4,6 +4,7 @@ import com.example.catalogservice.dto.CatalogDto;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.jpa.CatalogRepository;
 import com.example.catalogservice.vo.RequestNum;
+import com.example.catalogservice.vo.ResponseCatalog;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -11,12 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class CatalogServiceImpl implements  CatalogService{
     CatalogRepository repository;
 
     Environment env;
+
+
+
+
 
     @Autowired
     public CatalogServiceImpl(CatalogRepository repository, Environment env){
@@ -58,6 +66,18 @@ public class CatalogServiceImpl implements  CatalogService{
         CatalogEntity catalogEntity=mapper.map(catalogDto, CatalogEntity.class);
         repository.save(catalogEntity);
         return null;
+    }
+
+    @Override
+    public CatalogDto getMusicByMusicId(String musicId){
+        CatalogEntity catalogEntity = repository.findBymusicId(musicId);
+
+
+        CatalogDto catalogDto = new ModelMapper().map(catalogEntity, CatalogDto.class);
+
+
+
+        return catalogDto;
     }
 
 //    @Override
