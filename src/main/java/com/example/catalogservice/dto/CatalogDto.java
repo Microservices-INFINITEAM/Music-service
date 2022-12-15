@@ -18,9 +18,9 @@ public class CatalogDto implements Serializable {
 
 
     private String musicName;
-    private String musicArtistname;
-    private String musicWritername;
-    private String musicLiricistname;
+    private String musicArtistName;
+    private String musicWriterName;
+    private String musicLiricistName;
     private Integer musicStock;
 
     private String musicGenre;

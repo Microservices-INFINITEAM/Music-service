@@ -24,11 +24,11 @@ public class CatalogEntity implements Serializable {
     @Column(nullable = false)
     private Integer musicPrice;
     @Column(nullable = false)
-    private String musicArtistname;
+    private String musicArtistName;
     @Column(nullable = false)
-    private String musicWritername;
+    private String musicWriterName;
     @Column(nullable = false)
-    private String musicLiricistname;
+    private String musicLiricistName;
     @Column(nullable = false)
     private String musicGenre;
 

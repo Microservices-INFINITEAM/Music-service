@@ -21,15 +21,15 @@ public class RequestCatalog {
 
     @NotNull(message ="musicArtistName cannot be null")
     @Size(min = 2, message = "musicArtistName not be less than two characters")
-    private String musicArtistname;
+    private String musicArtistName;
 
     @NotNull(message ="musicWriterName cannot be null")
     @Size(min = 2, message = "musicWriterName not be less than two characters")
-    private String musicWritername;
+    private String musicWriterName;
 
     @NotNull(message ="musicliricistName cannot be null")
     @Size(min = 2, message = "musicliricistName not be less than two characters")
-    private String musicLiricistname;
+    private String musicLiricistName;
 
     @NotNull(message ="musicStock cannot be null")
     @Size(min = 2, message = "musicStock not be less than two characters")

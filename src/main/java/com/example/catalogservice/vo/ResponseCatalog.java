@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseCatalog {
-    private String musicID;
+    private String musicId;
     private String musicName;
     private String musicArtistName;
     private String musicWriterName;
