@@ -12,11 +12,11 @@ import java.util.List;
 public class CatalogDto implements Serializable {
     private String musicId;
     private Integer qty;
+    private String userId;
     private Integer musicPrice;
     private Integer totalPrice;
 
     private String orderId;
-    private String userId;
 
 
     private String musicName;

@@ -99,7 +99,13 @@ public class CatalogController {
     @GetMapping(value = "/{musicId}/{userId}")
     public ResponseEntity<ResponseCatalog> CheckMusic (@PathVariable("musicId") String musicId, @PathVariable("userId") String userId){
 
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+
+
         CatalogDto catalogDto = catalogService.getMusicByMusicId(musicId);
+        catalogDto.setUserId(userId);
         ResponseCatalog returnvalue = new ModelMapper().map(catalogDto, ResponseCatalog.class);
 
         kafkaProducer.send("music-count-topic",catalogDto);
