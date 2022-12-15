@@ -64,7 +64,7 @@ public class CatalogController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PostMapping(value = "/musics/change")
+    @PatchMapping(value = "/musics/change")
     public String  changeCatalogNum( @RequestBody RequestNum musicStock){
 
         String get  =   catalogService.modifyCount(musicStock);
