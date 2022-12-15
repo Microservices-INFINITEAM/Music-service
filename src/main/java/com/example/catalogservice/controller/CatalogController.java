@@ -27,7 +27,7 @@ public class CatalogController {
     KafkaProducer kafkaProducer;
 
     @Autowired
-    public CatalogController(Environment env, CatalogService catalogService){
+    public CatalogController(Environment env, CatalogService catalogService, KafkaProducer kafkaProducer){
         this.env = env;
         this.catalogService = catalogService;
         this.kafkaProducer =  kafkaProducer;
@@ -75,7 +75,6 @@ public class CatalogController {
         return "Stock is successfully updated"+"\n"+get;
     }
 
-
     @PostMapping(value = "/musics/add")
     public String  addCatalog(@RequestBody RequestCatalog music){
         ModelMapper mapper=new ModelMapper();
@@ -101,8 +100,6 @@ public class CatalogController {
 
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-
-
 
         CatalogDto catalogDto = catalogService.getMusicByMusicId(musicId);
         catalogDto.setUserId(userId);

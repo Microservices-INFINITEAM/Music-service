@@ -76,7 +76,6 @@ public class CatalogServiceImpl implements  CatalogService{
         CatalogDto catalogDto = new ModelMapper().map(catalogEntity, CatalogDto.class);
 
 
-
         return catalogDto;
     }
 
