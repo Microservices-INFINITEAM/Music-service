@@ -1,6 +1,7 @@
 package com.example.catalogservice.controller;
 
 
+import com.example.catalogservice.Katalog.KafkaProducer;
 import com.example.catalogservice.dto.CatalogDto;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.service.CatalogService;
@@ -23,11 +24,13 @@ import java.util.List;
 public class CatalogController {
     private Environment env;
     CatalogService catalogService;
+    KafkaProducer kafkaProducer;
 
     @Autowired
     public CatalogController(Environment env, CatalogService catalogService){
         this.env = env;
         this.catalogService = catalogService;
+        this.kafkaProducer =  kafkaProducer;
     }
 
     @GetMapping("/health_check")
@@ -93,6 +96,15 @@ public class CatalogController {
 
     }
 
+    @GetMapping(value = "/{musicId}/{userId}")
+    public ResponseEntity<ResponseCatalog> CheckMusic (@PathVariable("musicId") String musicId, @PathVariable("userId") String userId){
 
+        CatalogDto catalogDto = catalogService.getMusicByMusicId(musicId);
+        ResponseCatalog returnvalue = new ModelMapper().map(catalogDto, ResponseCatalog.class);
+
+        kafkaProducer.send("music-count-topic",catalogDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnvalue);
+    }
 
 }

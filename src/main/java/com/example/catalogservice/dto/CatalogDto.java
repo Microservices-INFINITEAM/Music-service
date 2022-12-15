@@ -34,15 +34,6 @@ public class CatalogDto implements Serializable {
     private List<ResponseCatalog> catalogs;
 
 
-    public void setCatalog(List<ResponseCatalog> musicList) {
-        String musicId;
-         String musicName;
-         String musicArtistName;
-         String musicWriterName;
-         String musicLiricistName;
-         Integer musicStock;
 
-         String musicGenre;
-    }
 
 }
