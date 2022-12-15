@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog-service")
+@RequestMapping("/music-service")
 public class CatalogController {
     private Environment env;
     CatalogService catalogService;
@@ -52,7 +52,7 @@ public class CatalogController {
 
 
 
-    @GetMapping(value ="/catalogs")
+    @GetMapping(value ="/musics")
     public ResponseEntity<List<ResponseCatalog>> getCatalogs(){
         Iterable<CatalogEntity> orderList = catalogService.getAllCatalogs();
 
@@ -64,7 +64,7 @@ public class CatalogController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PostMapping(value = "/catalogs/change")
+    @PostMapping(value = "/musics/change")
     public String  changeCatalogNum( @RequestBody RequestNum musicStock){
 
         String get  =   catalogService.modifyCount(musicStock);
@@ -73,18 +73,18 @@ public class CatalogController {
     }
 
 
-    @PostMapping(value = "/catalogs/add")
+    @PostMapping(value = "/musics/add")
     public String  addCatalog(@RequestBody RequestCatalog music){
         ModelMapper mapper=new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         CatalogDto catalogDto=mapper.map(music,CatalogDto.class);
         catalogService.addSoundtrack(catalogDto);
-        return "Catalog is created";
+        return "Soundtrack is successfully created";
     }
 
 //    get music-service/musics/{musicId}
-    @GetMapping(value = "/catalog/{musicId}",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/musics/{musicId}",produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<ResponseCatalog> getMusic(@PathVariable("musicId") String musicId){
         CatalogDto catalogDto = catalogService.getMusicByMusicId(musicId);
         ResponseCatalog returnvalue = new ModelMapper().map(catalogDto, ResponseCatalog.class);
